@@ -1,0 +1,10 @@
+.dropdown-toggle, .dropdown-toggle:hover, .dropdown-toggle:focus, .dropdown-toggle.show {
+    background: lightgreen;
+    color:white;
+}
+
+.dropdown-menu {
+    background: lightgreen;
+    --bs-dropdown-link-active-bg: white;
+    --bs-dropdown-link-active-color: black;
+}

@@ -1,28 +1,48 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
+import './component.css';
+
+const currencyList = {
+    '$': 'Dollar',
+    '£': 'Pound',
+    '€': 'Euro',
+    '₹': 'Ruppee'
+}
 
 const Currency = () => {
+    const { dispatch, currency } = useContext(AppContext);
+    const [newCurrency, setNewCurrency] = useState('$ Dollar')
+
+    const changeCurrency = (event) => {
+        const item = event.target.innerHTML;
+        //setCurrency(item);
+        dispatch({
+            type: 'CHG_CURRENCY',
+            payload: item.split(' ')[0],
+        });
+    }
+
     return (
         <div className="dropdown">
-            <button className="btn btn-lg dropdown-toggle dd_color" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Currency ($ Dollar)
+            <button className="btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Currency ({currency} {currencyList[currency]})
             </button>
             <ul class="dropdown-menu">
-                <li><button className="dropdown-item" type="button">$ Dollar</button></li>
-                <li><button className="dropdown-item" type="button">£ Pound</button></li>
-                <li><button className="dropdown-item" type="button">€ Euro</button></li>
-                <li><button className="dropdown-item" type="button">₹ Ruppee</button></li>
+                {
+                    Object.entries(currencyList).map(([key, value]) => (
+                        <li><button className="dropdown-item" type="button" onClick={(e) => changeCurrency(e)}>{key} {value}</button></li>
+                    ))
+                }
+      
             </ul>
         </div>
     );
 }
 
-
 export default Currency;
 
-       /* <select className="custom-select" id="inputGroupSelect02">
-                <option defaultValue value="$" name="Dollar">$ Dollar</option>
-                <option value="£" name="Pound">£ Pound</option>
-                <option value="€" name="Euro">€ Euro</option>
-                <option value="₹" name="Ruppee">₹ Ruppee</option>
-            </select>         */
+
+{/* <li><button className="dropdown-item" type="button" onClick={(e) => changeCurrency(e)}>$ Dollar</button></li>
+<li><button className="dropdown-item" type="button" onClick={(e) => changeCurrency(e)}>£ Pound</button></li>
+<li><button className="dropdown-item" type="button" onClick={(e) => changeCurrency(e)}>€ Euro</button></li>
+<li><button className="dropdown-item" type="button" onClick={(e) => changeCurrency(e)}>₹ Ruppee</button></li> */}
