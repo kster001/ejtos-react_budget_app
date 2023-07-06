@@ -30,7 +30,7 @@ const Budget = () => {
                 id='budget'
                 value={budget}
                 step={10}
-                style={{ marginLeft: '2rem' , size: 10}}
+                style={{size: 10}}
                 onChange={(event) => setBudget(event.target.value)}
                 onKeyDown={(event) => setBudget(event.target.value)}>
             </input>
